@@ -18,14 +18,23 @@
 
     <body>
     
+    <%
+   String fbtoken = request.getParameter( "access_token" );
+   
+    // THE FACEBOOK TOKEN FOR LOGIN
+    if(fbtoken!=null) { 
+    	out.println(fbtoken);
+    	session.setAttribute( "access_token", fbtoken );
+    }
     
+    // THE INSTAGRAM LOGIN PROCESS
+	%>
     
     <div id="fb-root"></div>
 
-    <div id="fb-root"></div>
 
 
-	<script type="text/javascript">
+<script type="text/javascript">
 		window.fbAsyncInit = function() {
 			// init the FB JS SDK
 			FB.init({
@@ -44,97 +53,28 @@
 						if (response.status === 'connected') {
 							// connected
 							console.log("connected");
-							document.getElementBydocumentId('fblogin').style.visibility = "hidden";
+							//document.getElementBydocumentId('fblogin').style.visibility = "hidden";
 							var access_token = FB.getAuthResponse()['accessToken'];
 							
 
 						} else if (response.status === 'not_authorized') {
 							//login();
 							
-							document.getElementById('fblogout').style.visibility = "hidden";
+							//document.getElementById('fblogout').style.visibility = "hidden";
 							console.log("not authorized");
 							// not_authorized
 						} else {
 							//login();
-							document.getElementById('fblogout').style.visibility = "hidden";
+							//document.getElementById('fblogout').style.visibility = "hidden";
 							console.log("not loged in");
 							// not_logged_in
 						}
 					});
 		};
 
-		// Load the SDK's source Asynchronously
-		(function(d, debug) {
-			var js, id = 'facebook-jssdk', ref = d
-					.getElementsByTagName('script')[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement('script');
-			js.id = id;
-			js.async = true;
-			js.src = "http://connect.facebook.net/en_US/all"
-					+ (debug ? "/debug" : "") + ".js";
-			ref.parentNode.insertBefore(js, ref);
-		}(document, /*debug*/false));
+		
 	</script>
 
-	<script type="text/javascript">
-	
-	
-	function login() {
-	    FB.login(function(response) {
-	    	if (response.authResponse) {
-	    	     var access_token =   FB.getAuthResponse()['accessToken'];
-	    	     console.log('Access Token = '+ access_token);
-	    	     ratethis(1,1,access_token);
-	    	   
-	    	     document.
-	    	     post_to_url("index.jsp",access_token);
-	            // connected
-	            testAPI();
-	        } else {
-	            // cancelled
-	        }
-	    
-	    }, {scope: 'email,user_likes'});
-	  
-	}
-
-		function check() {
-			FB.getLoginStatus(function(response) {
-				console.log('checked login status');
-			});
-		}
-
-		function logout() {
-			FB.logout(function(response) {
-				console.log('User is now logged out');
-			});
-		}
-
-		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
-			FB.api('/me', function(response) {
-				console.log('Good to see you, ' + response.name + '.');
-			});
-		}
-	</script>
-
-
-	<script>
-		$(document).ready(function() {	
-		console.log("Welcome to visitors from "+sGeobytesCity+", "+sGeobytesCountry);
-		$("#modal1").modal();
-		});
-	</script>
-
-	
-    
-    
-    
-    
-    
 
       <div class="site-wrapper">
         <div class="site-wrapper-inner">
@@ -179,12 +119,8 @@
       <!-- Bootstrap core JavaScript -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <script src="bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
-      
-      
-   
-   
-   
-   
+       <script src="bootstrap-3.1.1-dist/js/mycode.js"></script>
+
    
     </body>
   </html>
